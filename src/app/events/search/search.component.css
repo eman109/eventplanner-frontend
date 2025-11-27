@@ -1,0 +1,10 @@
+.filters {
+  margin-bottom: 15px;
+}
+.filters input, .filters select {
+  margin-right: 10px;
+}
+.error {
+  color: red;
+  font-weight: bold;
+}
