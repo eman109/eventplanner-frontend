@@ -1,0 +1,32 @@
+<h2>Advanced Search</h2>
+
+<div class="filters">
+  <input [(ngModel)]="keyword" placeholder="Keyword" />
+
+  <label>Date From:</label>
+  <input type="date" [(ngModel)]="dateFrom" />
+
+  <label>Date To:</label>
+  <input type="date" [(ngModel)]="dateTo" />
+
+  <label>Role:</label>
+  <select [(ngModel)]="role">
+    <option value="">Any Role</option>
+    <option value="organizer">Organizer</option>
+    <option value="attendee">Attendee</option>
+  </select>
+
+  <button (click)="search()" [disabled]="loading">Search</button>
+</div>
+
+<p *ngIf="error" class="error">{{ error }}</p>
+<p *ngIf="loading">Searching...</p>
+
+<div *ngIf="results.length > 0">
+  <h3>Results</h3>
+  <div *ngFor="let ev of results">
+    <app-event-card [event]="ev"></app-event-card>
+  </div>
+</div>
+
+<p *ngIf="!loading && results.length === 0">No events found.</p>

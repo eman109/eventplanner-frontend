@@ -10,6 +10,4 @@ import { RouterLink } from '@angular/router';
 })
 export class DashboardComponent {
   title = 'Dashboard';
-
-  // You can add logic here later, e.g. fetching events or user info
 }
