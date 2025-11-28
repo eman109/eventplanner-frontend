@@ -1,22 +1,18 @@
-import { Component } from '@angular/core';
-import { EventService } from '../services/event.service';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-@Component({
-  selector: 'app-invitations',
-  templateUrl: './invitations.component.html',
-  styleUrls: ['./invitations.component.css']
-})
-export class InvitationsComponent {
-  eventId = '';
-  email = '';
-  message = '';
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  private api = 'http://localhost:3000/api/auth';
 
-  constructor(private eventService: EventService) {}
+  constructor(private http: HttpClient) {}
 
-  onInvite() {
-    this.eventService.inviteFriend(this.eventId, this.email).subscribe({
-      next: (res) => this.message = 'Invitation sent!',
-      error: (err) => this.message = 'Failed to send invitation'
-    });
+  signup(email: string, password: string): Observable<any> {
+    return this.http.post(`${this.api}/signup`, { email, password });
+  }
+
+  login(email: string, password: string): Observable<any> {
+    return this.http.post(`${this.api}/login`, { email, password });
   }
 }

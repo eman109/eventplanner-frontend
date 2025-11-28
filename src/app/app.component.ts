@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-root',
   standalone: true,
-  imports: [RouterLink],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  imports: [RouterOutlet, RouterLink],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class DashboardComponent {
-  title = 'Dashboard';
-
-  // You can add logic here later, e.g. fetching events or user info
+export class AppComponent {
+  title = 'eventplanner-frontend';
 }
