@@ -1,0 +1,30 @@
+<div class="event-card">
+  <h3>{{ event.title }}</h3>
+  <p>{{ event.description }}</p>
+  <p>{{ event.date }} | {{ event.time }}</p>
+  <p>Location: {{ event.location }}</p>
+  <p>Role: {{ event.role }}</p>
+
+  <button *ngIf="event.role === 'organizer'" (click)="deleteEvent()">Delete Event</button>
+
+  <div *ngIf="event.attendees">
+    <h4>Attendees</h4>
+    <div *ngFor="let attendee of event.attendees">
+      {{ attendee.name }} - {{ attendee.status }}
+      <span 
+        class="status-badge"
+        [ngClass]="{
+          'status-going': attendee.status === 'Going',
+          'status-maybe': attendee.status === 'Maybe',
+          'status-not-going': attendee.status === 'Not Going'
+        }"
+      >
+        {{ attendee.status }}
+      </span>
+      
+      <button class="attendance-btn going" *ngIf="event.role === 'attendee'" (click)="updateStatus(attendee, 'Going')">Going</button>
+      <button class="attendance-btn maybe" *ngIf="event.role === 'attendee'" (click)="updateStatus(attendee, 'Maybe')">Maybe</button>
+      <button class="attendance-btn not-going" *ngIf="event.role === 'attendee'" (click)="updateStatus(attendee, 'Not Going')">Not Going</button>
+  </div>
+</div>
+
