@@ -1,0 +1,21 @@
+<div class="attendee-list">
+  <h3>Attendees</h3>
+
+  <div *ngFor="let attendee of attendees" class="attendee-card">
+    <div class="info">
+      <strong>{{ attendee.name }}</strong>
+      <p>Status: <span class="status">{{ attendee.status }}</span></p>
+    </div>
+
+    <div class="actions">
+      <button (click)="updateStatus(attendee, 'Going')"
+              [class.active]="attendee.status === 'Going'">Going</button>
+
+      <button (click)="updateStatus(attendee, 'Maybe')"
+              [class.active]="attendee.status === 'Maybe'">Maybe</button>
+
+      <button (click)="updateStatus(attendee, 'Not Going')"
+              [class.active]="attendee.status === 'Not Going'">Not Going</button>
+    </div>
+  </div>
+</div>

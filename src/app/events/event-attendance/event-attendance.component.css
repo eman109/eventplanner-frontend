@@ -1,0 +1,25 @@
+.attendee-list {
+  margin-top: 15px;
+}
+
+.attendee-card {
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actions button {
+  margin-left: 6px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.actions button.active {
+  background-color: #007bff;
+  color: white;
+}
