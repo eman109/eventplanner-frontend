@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div *ngIf="event as e" class="max-w-5xl mx-auto p-6 bg-white rounded-2xl shadow-lg mt-8">
+
+  <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
+    <div class="flex-1">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ e.title }}</h1>
+      <p class="text-gray-600 mb-2">{{ e.description }}</p>
+      
+      <div class="flex flex-wrap gap-4 text-gray-500 text-sm">
+        <span>📅 {{ e.date }} | {{ e.time }}</span>
+        <span>📍 {{ e.location }}</span>
+        <span class="font-semibold">Role: {{ e.role }}</span>
+        <span class="font-medium">Organizer: {{ e.organizerName }}</span>
+      </div>
+    </div>
+
+    <div class="flex-shrink-0">
+      <button *ngIf="e.role === 'organizer'"
+              (click)="deleteEvent()"
+              class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl shadow-md transition-transform transform hover:-translate-y-1">
+        Delete Event
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-10">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">Attendees</h2>
+    
+    <div *ngIf="(e.attendees ?? []).length === 0" class="text-gray-500 italic">
+        No attendees yet.
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+      <div *ngFor="let attendee of e.attendees"
+           class="flex items-center justify-between bg-gray-50 p-4 rounded-xl shadow hover:shadow-md transition">
+        
+        <div>
+          <p class="font-medium text-gray-800">{{ attendee.name }}</p>
+          <span 
+            [ngClass]="{
+              'bg-green-100 text-green-800': attendee.status === 'Going',
+              'bg-yellow-100 text-yellow-800': attendee.status === 'Maybe',
+              'bg-red-100 text-red-800': attendee.status === 'Not Going'
+            }"
+            class="inline-block px-3 py-1 rounded-full text-sm font-semibold mt-1">
+            {{ attendee.status }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
