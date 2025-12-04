@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: 'dashboard', component: Dashboard },
   { path: 'events/create', component: EventCreate },
   { path: 'events', component: EventsList },
-  { path: 'events/:id', component: EventDetail },
   { path: 'events/organized', component: OrganizedEvents },
   { path: 'events/invited', component: InvitedEvents },
+  { path: 'events/:id', component: EventDetail },
 ];
