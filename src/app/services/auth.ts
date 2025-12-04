@@ -43,8 +43,9 @@ export class Auth {
     return u ? u.name : null;
   }
 
-  signup(email: string, password: string): Observable<any> {
+  signup(name: string, email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/signup`, {
+      name,
       email,
       password
     });
