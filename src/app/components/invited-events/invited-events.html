@@ -1,10 +1,11 @@
+<app-navbar></app-navbar>
 <div class="max-w-5xl mx-auto p-6">
-  <h2 class="text-3xl font-bold mb-6">Events I’m Invited To</h2>
+  <h2 class="text-3xl font-bold mb-6">Events I'm Invited To</h2>
 
   <div *ngIf="loading" class="text-gray-500">Loading your invited events...</div>
   <div *ngIf="error" class="text-red-500">{{ error }}</div>
   <div *ngIf="!loading && events.length === 0" class="text-gray-600">
-    You haven’t been invited to any events yet.
+    You haven't been invited to any events yet.
   </div>
 
   <div *ngIf="events.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
