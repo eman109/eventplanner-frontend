@@ -1,58 +1,50 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { Navbar } from '../navbar/navbar';
-import { EventCard }  from '../event-card/event-card';
+import { EventCard } from '../event-card/event-card';
+import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-events-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, Navbar, EventCard],
+  imports: [CommonModule, RouterModule, Navbar, EventCard, NgFor, NgIf, FormsModule],
   templateUrl: './event-list.html',
 })
-export class EventsList implements OnInit, OnDestroy {
+export class EventsList implements OnInit {
+
   events: any[] = [];
   errorMessage = '';
-  loading = true;                    // ← ADD THIS
-  private routerSub!: Subscription;
+
+  searchText: string = '';
+  searchKeyword: string = '';
+  dateFrom: string = '';
+  dateTo: string = '';
+  role: string = '';
+  showFilter = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
-    this.loadEvents();   // ← This runs on first load
+    this.loadEvents();
 
-    // This runs EVERY time user navigates to /events (even from login)
-    this.routerSub = this.router.events
+    this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        if (event.urlAfterRedirects === '/events' || event.urlAfterRedirects === '/events/') {
+      .subscribe((event: any) => {
+        if (event.urlAfterRedirects === '/events') {
           this.loadEvents();
         }
       });
   }
 
-  ngOnDestroy(): void {
-    this.routerSub?.unsubscribe();
-  }
-
   loadEvents() {
-    this.loading = true;
-    this.errorMessage = '';
-
-    this.http.get<any[]>('http://localhost:3000/api/events').subscribe({
-      next: (data) => {
-        this.events = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        this.errorMessage = err.error?.message || 'Failed to load events';
-        this.events = [];
-        this.loading = false;
-      }
-    });
+    this.http.get('http://localhost:3000/api/events')
+      .subscribe({
+        next: (data: any) => this.events = data,
+        error: (err) => this.errorMessage = err.error?.message || 'Failed to load events'
+      });
   }
 
   goToCreate() {
@@ -61,5 +53,23 @@ export class EventsList implements OnInit, OnDestroy {
 
   displayEventDetails(eventId: string) {
     this.router.navigate([`/events/${eventId}`]);
+  }
+
+  search() {
+    console.log('Apply clicked, filters:', {
+      keyword: this.searchKeyword || this.searchText,
+      dateFrom: this.dateFrom,
+      dateTo: this.dateTo,
+      role: this.role
+    });
+
+    this.router.navigate(['/events/search'], {
+      queryParams: {
+        keyword: this.searchKeyword || this.searchText || null,
+        dateFrom: this.dateFrom || null,
+        dateTo: this.dateTo || null,
+        role: this.role || null,
+      }
+    });
   }
 }

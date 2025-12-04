@@ -34,7 +34,6 @@ export class EventDetail implements OnInit {
     });
   }
 
-  // Load event by ID using EventService (JWT included automatically)
   loadEvent(id: string) {
     this.eventService.getEventById(id).subscribe({
       next: (event) => {
