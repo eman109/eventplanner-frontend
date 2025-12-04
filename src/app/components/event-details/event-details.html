@@ -7,9 +7,8 @@
       <p class="text-gray-600 mb-2">{{ e.description }}</p>
       
       <div class="flex flex-wrap gap-4 text-gray-500 text-sm">
-        <span>📅 {{ e.date }} | {{ e.time }}</span>
+        <span>📅 {{ event.date | date:'dd/MM/yyyy' }} | {{ e.time }}</span>
         <span>📍 {{ e.location }}</span>
-        <span class="font-semibold">Role: {{ e.role }}</span>
         <span class="font-medium">Organizer: {{ e.organizerName }}</span>
       </div>
     </div>
