@@ -2,7 +2,6 @@
   class="event-card relative cursor-pointer bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-lg transition-shadow transform hover:-translate-y-1 hover:scale-105 duration-200 p-6 flex flex-col gap-3"
   (click)="viewDetails()"
 >
-  <!-- Show delete only for organizers -->
   <button 
     (click)="deleteEvent(); $event.stopPropagation()"
     class="absolute bottom-5 right-4 cursor-pointer text-red-500 hover:text-red-600 transition duration-300 font-semibold"

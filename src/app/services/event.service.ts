@@ -40,29 +40,37 @@ export class EventService {
 
   constructor(private http: HttpClient) {}
 
-  // Helper: get Authorization headers with JWT
-  private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token'); // get JWT from localStorage
-    if (!token) {
-      console.warn('No JWT token found in localStorage!');
-    }
-    return new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-  }
-
-  // Public methods
 
   getEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(this.apiUrl);
   }
 
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');  // or however you store it
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  }
+
+  // Fix ALL your methods like this:
+  searchEvents(params: any): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.apiUrl}/search`, {
+      headers: this.getAuthHeaders(),
+      params: params                     // <-- Angular auto-converts to query string
+    });
+  }
+
   getEventById(id: string): Observable<Event> {
-    return this.http.get<Event>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+    return this.http.get<Event>(`${this.apiUrl}/${id}`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   getOrganizedEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(`${this.apiUrl}/organized`, { headers: this.getAuthHeaders() });
+    return this.http.get<Event[]>(`${this.apiUrl}/organized`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   getInvitedEvents(): Observable<Event[]> {
@@ -84,4 +92,9 @@ export class EventService {
       { headers: this.getAuthHeaders() }
     );
   }
-}
+
+  invite(eventId: string, email: string) {
+    return this.http.post(`${this.apiUrl}/${eventId}/invite`, { email });
+  }
+
+} 

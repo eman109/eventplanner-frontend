@@ -11,9 +11,9 @@ import { Auth } from '../../services/auth';
   standalone: true,
   imports: [FormsModule, CommonModule,RouterLink],
   templateUrl: './signup.html',
+  styleUrls: ['./signup.css']
 })
 export class Signup {
-  name = '';
   email = '';
   password = '';
   message = '';
@@ -23,7 +23,7 @@ export class Signup {
   ) {}
 
   onSubmit() {
-    this.auth.signup(this.name,this.email, this.password).subscribe({
+    this.auth.signup(this.email, this.password).subscribe({
       next: (res: any) => {
         this.message = res.message || 'Signup successful!';
         this.router.navigate(['/login']);
