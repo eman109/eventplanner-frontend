@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
-import { Navbar } from '../navbar/navbar';
 import { EventCard } from '../event-card/event-card';
 import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs/operators';
@@ -10,7 +9,7 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-events-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, Navbar, EventCard, NgFor, NgIf, FormsModule],
+  imports: [CommonModule, RouterModule, EventCard, NgFor, NgIf, FormsModule],
   templateUrl: './event-list.html',
 })
 export class EventsList implements OnInit {

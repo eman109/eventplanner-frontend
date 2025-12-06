@@ -3,12 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { EventService } from '../../services/event.service';
 import { EventCard } from '../event-card/event-card';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { Navbar } from '../navbar/navbar';
 
 @Component({
   selector: 'app-event-search-results',
   standalone: true,
-  imports: [CommonModule, EventCard, NgFor, NgIf, Navbar],
+  imports: [CommonModule, EventCard, NgFor, NgIf],
   templateUrl: './search-results.html'
 })
 export class SearchResults implements OnInit {

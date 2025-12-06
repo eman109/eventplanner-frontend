@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { EventService, Event } from '../../services/event.service';
 import { EventCard } from '../event-card/event-card';
 import { Auth } from '../../services/auth';
+import { Navbar } from '../navbar/navbar';
+
 
 interface BackendEvent {
   _id: string;
@@ -21,7 +23,7 @@ interface BackendEvent {
 @Component({
   selector: 'app-organized-events',
   standalone: true,
-  imports: [CommonModule, RouterModule, EventCard],
+  imports: [CommonModule, RouterModule, EventCard, Navbar],
   templateUrl: './organized-events.html',
 })
 export class OrganizedEvents implements OnInit {

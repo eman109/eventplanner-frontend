@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventService, Event } from '../../services/event.service';
-import { Auth } from '../../services/auth'; 
+import { Auth } from '../../services/auth';
 import { EventCard } from '../event-card/event-card';
+import { Navbar } from '../navbar/navbar';
+
 
 @Component({
   selector: 'app-invited-events',
   standalone: true,
-  imports: [CommonModule, EventCard],
+  imports: [CommonModule, EventCard, Navbar],
   templateUrl: './invited-events.html',
 })
 export class InvitedEvents implements OnInit {
