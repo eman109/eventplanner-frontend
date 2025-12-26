@@ -16,7 +16,7 @@ FROM nginx:alpine
 
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=builder /app/dist/eventplanner-frontend/browser /usr/share/nginx/html
+COPY --from=build /app/dist/eventplanner-frontend/browser /usr/share/nginx/html
 
 #my custom nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
