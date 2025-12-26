@@ -23,4 +23,6 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
+ARG API_URL=backend-crt-20225061-dev.apps.rm1.0a51.p1.openshiftapps.com
+ENV NG_BUILD_API_URL=$API_URL
 CMD ["nginx", "-g", "daemon off;"]
