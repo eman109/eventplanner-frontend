@@ -4,10 +4,11 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 
+ENV NODE_OPTIONS=--max-old-space-size=4096
 #build html,css,js files
 RUN npm run build -- --configuration production
 
